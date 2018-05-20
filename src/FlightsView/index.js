@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
 import Flight from './Flight';
+import styled from 'styled-components';
+
+const CenteredButton = styled.div`
+  margin-top: 100px;
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`;
 
 export default class FlightsView extends Component {
   state = {
@@ -27,7 +35,9 @@ export default class FlightsView extends Component {
           flight => <Flight key={flight.id} flight={flight}></Flight>)
         }
         </ul>
-        <Button onClick={this.goBack} type="submit" variant="raised" color="primary">Back</Button>
+      <CenteredButton>
+        <Button className="centered-button" size='large' onClick={this.goBack} type="submit" variant="raised" color="primary">Back</Button>
+      </CenteredButton>
       </React.Fragment>
     )
   }
