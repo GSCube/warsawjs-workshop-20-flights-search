@@ -21,7 +21,7 @@ class SearchView extends Component {
   state = {
     from: "LON",
     to: "WAW",
-    departTime: "2018-10-12",
+    departTime: "2018-01-01",
     arrivalTime: "2018-12-12"
   };
 
@@ -41,14 +41,22 @@ class SearchView extends Component {
       <form onSubmit={this.onSubmit}>
       <Label>From</Label>
       <select value={from} onChange={this.onFormChange('from')}>
-        <option>WAW</option>
-        <option>LON</option>
+        {
+          this.props.airports.map(
+          airport => (<option key={airport.id}>{airport.code}</option>)
+          )
+        }
       </select>
 
       <Label>To</Label>
       <select value={to} onChange={this.onFormChange('to')}>
-        <option>WAW</option>
-        <option>LON</option>
+        {
+          this.props.airports.map(
+          airport =>
+            (
+              <option  key={airport.id}>{airport.code}</option>)
+            )
+        }
       </select>
 
       <Label>Depart Date</Label>

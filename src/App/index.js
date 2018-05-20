@@ -4,8 +4,26 @@ import FlightsView from '../FlightsView'
 
 export default class App extends Component {
   state = {
-    view: 'search'
+    view: 'search',
+    airports: []
   }
+
+  async componentDidMount() {
+    const url = 'https://warsawjs-flights-api.herokuapp.com/airports'
+    const result = await fetch(url)
+    const airports  = (await result.json()).map(airport =>
+       (
+         {
+          id: airport.id,
+          code: airport.code
+         }
+       )
+     )
+    this.setState({
+      airports
+    })
+  }
+
   onSearch = (searchData) => {
     this.setState({
       view: 'flights',
@@ -20,10 +38,10 @@ export default class App extends Component {
 
 
   render() {
-    const { view, searchData } = this.state
+    const { view, searchData, airports } = this.state
     switch (this.state.view) {
       case 'search':
-        return <SearchView onSearch={this.onSearch}/>
+        return <SearchView airports={airports} onSearch={this.onSearch}/>
       case 'flights':
         return <FlightsView searchData={searchData} onReturn={this.onReturn}/>
       default:
