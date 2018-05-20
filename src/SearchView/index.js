@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Button from '@material-ui/core/Button';
 
 class SearchView extends Component {
 
@@ -15,13 +16,14 @@ class SearchView extends Component {
 
   onSubmit = e => {
     e.preventDefault()
-    this.props.onSearch()
+    this.props.onSearch(this.state)
   }
 
   render() {
     const {to, from, departTime, arrivalTime} = this.state
 
-    return (<form>
+    return (
+      <form onSubmit={this.onSubmit}>
       <label>From</label>
       <select value={from} onChange={this.onFormChange('from')}>
         <option>WAW</option>
@@ -40,7 +42,7 @@ class SearchView extends Component {
       <label>Return Date</label>
       <input type="date" value={arrivalTime} onChange={this.onFormChange('arrivalTime')}/>
 
-      <button type="submit">Search</button>
+      <Button type="submit" variant="raised" color="primary">Search</Button>
     </form>)
   }
 }
